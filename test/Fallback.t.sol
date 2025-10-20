@@ -17,8 +17,7 @@ contract FallbackTest is Test {
     address payable private player = payable(address(this)); // 我们的攻击合约地址
 
     function setUp() public {
-        // 在 Goerli 测试网上 fork 区块链状态
-        // 这能让我们的本地测试环境拥有和真实测试网一模一样的状态
+        // 让本地测试环境拥有和真实测试网一模一样的状态
         vm.createSelectFork("sepolia");
     }
 
@@ -39,14 +38,5 @@ contract FallbackTest is Test {
         // --- 庆祝胜利！ ---
         console.log(unicode"夺权成功！新 owner 是:", level.owner());
         console.log(unicode"此时我的余额是:", player.balance);
-
-        /* --- 这次我们彻底明白了，这个函数在链上不存在，所以必须注释掉 ---
-        // 我们已经知道这一步会失败，因为它调用了一个不存在的函数
-        console.log(unicode"准备抢钱！合约当前余额:", address(level).balance);
-        level.withdraw();
-        assertEq(address(level).balance, 0);
-        console.log(unicode"抢钱成功！我最终的余额是:", player.balance);
-
-        */
     }
 }
