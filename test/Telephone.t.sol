@@ -8,7 +8,6 @@ interface ITelephone {
     function owner() external view returns (address);
 }
 
-
 contract TelephoneAttacker {
     ITelephone private level;
 
